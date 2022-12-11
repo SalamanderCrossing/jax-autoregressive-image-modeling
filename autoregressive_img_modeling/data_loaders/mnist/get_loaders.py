@@ -3,26 +3,29 @@ import torch
 from torch.utils import data
 import numpy as np
 
+
 def image_to_numpy(img):
-        img = np.array(img, dtype=np.int32)
-        img = img[..., None]  # Make image [28, 28, 1]
-        return img
+    img = np.array(img, dtype=np.int32)
+    img = img[..., None]  # Make image [28, 28, 1]
+    return img
 
-    # We need to stack the batch elements
-    def numpy_collate(batch):
-        if isinstance(batch[0], np.ndarray):
-            return np.stack(batch)
-        elif isinstance(batch[0], (tuple, list)):
-            transposed = zip(*batch)
-            return [numpy_collate(samples) for samples in transposed]
-        else:
-            return np.array(batch)
 
-def get_loaders(train_batch_size:int, test_batch_size:int):
+# We need to stack the batch elements
+def numpy_collate(batch):
+    if isinstance(batch[0], np.ndarray):
+        return np.stack(batch)
+    elif isinstance(batch[0], (tuple, list)):
+        transposed = zip(*batch)
+        return [numpy_collate(samples) for samples in transposed]
+    else:
+        return np.array(batch)
+
+
+def get_loaders(train_batch_size: int, test_batch_size: int):
     # Transformations applied on each image => bring them into a numpy array
     # Note that we keep them in the range 0-255 (integers)
 
-    DATASET_PATH = './data'
+    DATASET_PATH = "./data"
     # Loading the training dataset. We need to split it into a training and validation part
     train_dataset = MNIST(
         root=DATASET_PATH, train=True, transform=image_to_numpy, download=True
