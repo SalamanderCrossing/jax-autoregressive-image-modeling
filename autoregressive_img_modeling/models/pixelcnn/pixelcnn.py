@@ -67,7 +67,7 @@ class PixelCNN(nn.Module):
         )
         return out
 
-    def sample(self, img_shape, rng, img=None | jnp.ndarray = None):
+    def sample(self, img_shape, rng, img: None | jnp.ndarray = None):
         """
         Sampling function for the autoregressive model.
         Inputs:
