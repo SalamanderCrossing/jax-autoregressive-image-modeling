@@ -1,0 +1,45 @@
+{
+    "autoregressive_img_modeling": {
+        "name": "autoregressive_img_modeling",
+        "project": {
+            "models": {
+                "pixelcnn": {
+                    "name": "pixelcnn",
+                    "exports": [
+                        "PixelCNN"
+                    ],
+                    "errors": []
+                }
+            },
+            "data_loaders": {
+                "mnist": {
+                    "name": "mnist",
+                    "exports": [
+                        "get_loaders"
+                    ],
+                    "errors": []
+                }
+            },
+            "trainers": {
+                "trainer": {
+                    "name": "trainer",
+                    "exports": [
+                        "TrainerModule"
+                    ],
+                    "errors": []
+                }
+            },
+            "experiments": {
+                "pixelcnn": {
+                    "name": "pixelcnn",
+                    "errors": [],
+                    "imports": [
+                        "data_loaders",
+                        "models",
+                        "trainers"
+                    ]
+                }
+            }
+        }
+    }
+}
